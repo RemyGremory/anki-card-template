@@ -4,8 +4,8 @@ A responsive Anki card template for learning vocabulary on desktop, iPhone,
 and Android. It includes configurable speech, recorded MP3 audio, study
 sequences, images, hints, themes, accents, and compact settings controls.
 
-> Want to generate local MP3 audio and add it to cards automatically? Use the
-> companion [Anki Voice Studio](https://github.com/RemyGremory/anki-voice-studio).
+> Want to generate MP3 audio and add it to cards automatically? Use
+> [Anki Voice Studio](https://github.com/RemyGremory/anki-voice-studio).
 
 ## Features
 
@@ -25,7 +25,7 @@ Before changing a note type, make an Anki backup.
 
 1. In Anki Desktop, open **Tools → Manage Note Types**.
 2. Select the note type you want to use and click **Fields…**.
-3. Create the fields below if they do not already exist. Their order is not
+3. Create the following fields if they do not already exist. Their order is not
    important, but the names must match exactly:
 
    `Front`, `Back`, `Description`, `Example`, `verb`, `Comment`, `Image`,
@@ -36,11 +36,11 @@ Before changing a note type, make an Anki backup.
 6. Copy the contents of `Back.html` into the **Back Template**.
 7. Copy the contents of `Styleng.css` into the **Styling** section.
 8. Save, then use **Preview** to test a card.
-9. In Anki Desktop, click **Sync**. Because the fields or template changed,
-   Anki may require a one-way sync: choose **Upload to AnkiWeb** from the
-   computer that contains these changes. On a phone or other device where you
-   use Anki, click **Sync** and choose **Download from AnkiWeb**. This makes
-   the updated note type and template available there as well.
+9. In Anki Desktop, click **Sync**. If Anki asks how to handle the template
+   changes, choose **Upload to AnkiWeb** on the computer where you installed
+   the template. Then, on a phone or other device where you use Anki, click
+   **Sync** and choose **Download from AnkiWeb**. The updated note type and
+   template will then be available on that device too.
 
 ## How to use the fields
 
@@ -77,18 +77,19 @@ Main settings include:
 
 ## Recorded audio
 
-The easiest way to create audio is with the companion
+To create audio for many cards at once, use
 [Anki Voice Studio](https://github.com/RemyGremory/anki-voice-studio). It can
-create a CSV with MP3 files for new cards or write audio directly to selected
-existing cards. After that, sync Anki normally for iPhone or Android.
+make a CSV with MP3 files for new cards or add audio directly to selected
+existing cards. Afterwards, sync Anki as usual to use the audio on iPhone or
+Android.
 
-You can also add an MP3 file manually in Anki Desktop by dragging it into one
-of the `Audio…` fields.
+You can also add an MP3 manually in Anki Desktop: drag it into `AudioWord`,
+`AudioTranslation`, or `AudioExample`.
 
 ## Notes
 
-- The template works without recorded MP3 files; it can use the device’s own
-  speech voices instead.
+- The template also works without recorded MP3 files: it uses the speech voices
+  available on the device instead.
 - Some system voices are available only on a particular device. Downloaded iOS
   voices may not always be exposed to Anki’s browser engine, so recorded MP3
   audio is the most reliable way to get the same voice everywhere.
