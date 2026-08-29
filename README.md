@@ -36,8 +36,11 @@ Before changing a note type, make an Anki backup.
 6. Copy the contents of `Back.html` into the **Back Template**.
 7. Copy the contents of `Styleng.css` into the **Styling** section.
 8. Save, then use **Preview** to test a card.
-9. Sync Anki after the template looks correct on the computer. The template
-   will then appear on the phone as well.
+9. In Anki Desktop, click **Sync**. Because the fields or template changed,
+   Anki may require a one-way sync: choose **Upload to AnkiWeb** from the
+   computer that contains these changes. On each phone or other computer, click
+   **Sync** and choose **Download from AnkiWeb**. This makes the updated note
+   type and template appear on every device.
 
 ## How to use the fields
 
