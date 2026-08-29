@@ -1,0 +1,513 @@
+<style id="am-preload-bg">
+/* iOS AnkiMobile sometimes shows the WebView default (black) before external CSS applies.
+   This tiny inline style paints the same background immediately on each card side. */
+:root{
+  --am-bg:#080c12;
+  --am-card-bg: rgba(18,22,32,.55);
+  --am-accent-rgb: 74,196,226;
+  --am-gradient-1: rgba(var(--am-accent-rgb),.18);
+  --am-gradient-2: rgba(var(--am-accent-rgb),.10);
+  --am-card-preload-border: rgba(255,255,255,.12);
+}
+:root.am-v2{
+  --am-bg:#070a10;
+  --am-card-bg: rgba(22, 26, 38, .62);
+  --am-gradient-1: rgba(var(--am-accent-rgb),.16);
+  --am-gradient-2: rgba(var(--am-accent-rgb),.10);
+}
+:root.light-mode.am-v2{
+  --am-bg:#f3f6fb;
+  --am-card-bg: rgba(255,255,255,.92);
+  --am-gradient-1: rgba(var(--am-accent-rgb),.16);
+  --am-gradient-2: rgba(var(--am-accent-rgb),.08);
+  --am-card-preload-border: rgba(10,18,28,.13);
+}
+:root[data-am-accent="purple"]{ --am-accent-rgb: 167,139,250; }
+:root[data-am-accent="green"]{ --am-accent-rgb: 52,211,153; }
+:root[data-am-accent="pink"]{ --am-accent-rgb: 244,114,182; }
+:root[data-am-accent="yellow"]{ --am-accent-rgb: 250,204,21; }
+:root[data-am-accent="orange"]{ --am-accent-rgb: 251,146,60; }
+:root[data-am-accent="indigo"]{ --am-accent-rgb: 99,102,241; }
+:root[data-am-accent="teal"]{ --am-accent-rgb: 20,184,166; }
+:root[data-am-accent="coral"]{ --am-accent-rgb: 251,113,133; }
+:root[data-am-accent="forest"]{ --am-accent-rgb: 34,197,94; }
+html, body, body.card, #qa, .card{
+  background:
+    radial-gradient(1200px 700px at 20% 0%, var(--am-gradient-1), transparent 55%),
+    radial-gradient(900px 600px at 90% 10%, var(--am-gradient-2), transparent 60%),
+    var(--am-bg) !important;
+  background-color: var(--am-bg) !important;
+  background-attachment: scroll !important;
+}
+.am-card{
+  background: var(--am-card-bg) !important;
+  border: 0.5px solid var(--am-card-preload-border) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+@supports (-webkit-touch-callout: none) {
+  /* Critical anti-flash: keep the card visible even before the full CSS finishes parsing. */
+  .am-card.am-enter {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+</style>
+
+<div class="am" data-side="back">
+  {{#AudioWord}}<div id="amAudioWord" class="am-recordedAudioSource" aria-hidden="true">{{AudioWord}}</div>{{/AudioWord}}
+  {{#AudioTranslation}}<div id="amAudioTranslation" class="am-recordedAudioSource" aria-hidden="true">{{AudioTranslation}}</div>{{/AudioTranslation}}
+  {{#AudioExample}}<div id="amAudioExample" class="am-recordedAudioSource" aria-hidden="true">{{AudioExample}}</div>{{/AudioExample}}
+  <div class="am-card am-enter">
+    <div class="am-head am-head--compact am-clickable" onclick="AM.act('speakPrompt', event)">
+      <div class="am-title" id="amPrompt">
+        <span class="am-t am-front" data-lang="en-US">{{Front}}</span>
+        <span class="am-t am-back"  data-lang="ru-RU">{{Back}}</span>
+      </div>
+    </div>
+
+    <div id="diffResult" class="am-block" hidden>
+      <div class="am-blockTitle"></div>
+      <div id="diffOutput" class="am-blockText" style="font-size: 1.2em; line-height: 1.5;"></div>
+    </div>
+
+    <div class="am-panel" id="amDetails" hidden>
+      {{#Description}}
+      <div class="am-block am-clickable" onclick="AM.playBlock(event)">
+        <div class="am-blockTitle">Description</div>
+        <div class="am-blockText">{{Description}}</div>
+      </div>
+      {{/Description}}
+
+      {{#Example}}
+      <div class="am-block am-clickable" onclick="AM.playBlock(event)">
+        <div class="am-blockTitle">Example</div>
+        <div class="am-blockText am-exampleText">{{Example}}</div>
+      </div>
+      {{/Example}}
+
+      {{#verb}}
+      <div class="am-block am-clickable" onclick="AM.playBlock(event)">
+        <div class="am-blockTitle">Verb</div>
+        <div class="am-blockText">{{verb}}</div>
+      </div>
+      {{/verb}}
+    </div>
+
+    <div class="am-answer" id="amAnswerPanel" hidden>
+      <div class="am-answerTitle">ANSWER</div>
+      <div class="am-answerText am-clickable" onclick="AM.playAnswer(event)">
+        <span class="am-a am-front" style="display:none;" data-lang="en-US">{{Front}}</span>
+        <span class="am-a am-back" data-lang="ru-RU">{{Back}}</span>
+      </div>
+    </div>
+
+    {{#Image}}
+    <div class="am-imagePanel" id="amImagePanel" hidden>
+      {{Image}}
+    </div>
+    {{/Image}}
+
+    <div class="am-actions am-actions--bottom">
+      <button class="am-btn" onclick="AM.toggleSection('amDetails')">Details</button>
+      <button class="am-btn" onclick="AM.toggleSection('amAnswerPanel')">Answer</button>
+      {{#Image}}<button class="am-btn" onclick="AM.toggleSection('amImagePanel')">Image</button>{{/Image}}
+      <button class="am-btn" onclick="AM.toggleSection('amComment')">Comment</button>
+    </div>
+  </div>
+
+  {{#Comment}}
+  <div class="am-floatPanel" id="amComment" hidden>
+    <div class="am-floatTitle">Comment</div>
+    <div class="am-floatText">{{Comment}}</div>
+  </div>
+  {{/Comment}}
+
+  <div class="am-fixed-wrap" id="amFixedWrap">
+    <button class="am-gear tappable" onclick="AM.act('toggleMenu', event)" type="button">
+      <svg viewBox="0 0 24 24"><path d="M19.14,12.94a7.43,7.43,0,0,0,.05-.94,7.43,7.43,0,0,0-.05-.94l2.11-1.65a.5.5,0,0,0,.12-.64l-2-3.46a.5.5,0,0,0-.6-.22l-2.49,1a7.28,7.28,0,0,0-1.63-.94l-.38-2.65A.5.5,0,0,0,12.8,2H9.2a.5.5,0,0,0-.49.42L8.33,5.07a7.28,7.28,0,0,0-1.63.94l-2.49-1a.5.5,0,0,0-.6.22l-2,3.46a.5.5,0,0,0,.12.64L3.86,11.06a7.43,7.43,0,0,0-.05.94,7.43,7.43,0,0,0,.05.94L1.75,14.59a.5.5,0,0,0-.12.64l2,3.46a.5.5,0,0,0,.6.22l2.49-1a7.28,7.28,0,0,0,1.63.94l.38,2.65A.5.5,0,0,0,9.2,22h3.6a.5.5,0,0,0,.49-.42l.38-2.65a7.28,7.28,0,0,0,1.63-.94l2.49,1a.5.5,0,0,0,.6-.22l2-3.46a.5.5,0,0,0-.12-.64ZM11,15.5A3.5,3.5,0,1,1,14.5,12,3.5,3.5,0,0,1,11,15.5Z"/></svg>
+    </button>
+
+    <button class="am-stopAudio tappable" id="amStopAudio" onclick="AM.stopAudio(event)" type="button" title="Stop audio" aria-label="Stop audio" hidden>
+      <svg viewBox="0 0 24 24"><path d="M7,7H17V17H7Z"/></svg>
+    </button>
+
+    <div class="am-overlay" id="amOverlay" onclick="AM.act('closeMenu', event)" hidden></div>
+
+    <div class="am-menu" id="amMenu" hidden>
+      <div class="am-menuHead">
+        <div>
+          <div class="am-menuTitle">Settings</div>
+          <div class="am-menuSubtitle">Quick controls</div>
+        </div>
+      </div>
+
+      <section class="am-menuSection">
+        <div class="am-menuSectionTitle">Audio</div>
+        <div class="am-tileGrid">
+          <button class="am-tile" id="tgAutoSpeak" type="button" onclick="AM.act('toggleAutoSpeak', event)" title="Auto speak Front"><span class="am-tileGlyph">F</span><span class="am-tileText"><span class="am-tileLabel">Speak</span><span class="am-tileSub">Front</span></span></button>
+          <button class="am-tile" id="tgAutoSpeakBack" type="button" onclick="AM.act('toggleAutoSpeakBack', event)" title="Auto speak Back"><span class="am-tileGlyph">B</span><span class="am-tileText"><span class="am-tileLabel">Speak</span><span class="am-tileSub">Back</span></span></button>
+          <button class="am-tile" id="tgSkipParentheses" type="button" onclick="AM.act('toggleSkipParentheses', event)" title="Do not speak text in parentheses"><span class="am-tileGlyph">( )</span><span class="am-tileText"><span class="am-tileLabel">Skip</span><span class="am-tileSub">brackets</span></span></button>
+        </div>
+      </section>
+
+      <section class="am-menuSection">
+        <div class="am-menuSectionTitle">Study</div>
+        <div class="am-tileGrid">
+          <button class="am-tile" id="tgStudyMode" type="button" onclick="AM.act('toggleStudyMode', event)" title="Study-mode audio"><span class="am-tileGlyph">↻</span><span class="am-tileText"><span class="am-tileLabel">Study</span><span class="am-tileSub">mode</span></span></button>
+          <button class="am-tile am-tile--value is-hidden" id="studyCyclesRow" type="button" onclick="AM.act('studyCycles', event)" title="Study cycles"><span class="am-tileGlyph">×</span><span class="am-tileText"><span class="am-tileLabel">Cycles</span><span class="am-tileSub">study mode</span></span><span class="am-tileValue" id="studyCyclesLabel">1×</span></button>
+          <button class="am-tile am-tile--value is-hidden" id="studySequenceRow" type="button" onclick="AM.act('studySequence', event)" title="Order of study-mode audio"><span class="am-tileGlyph">≋</span><span class="am-tileText"><span class="am-tileLabel">Sequence</span><span class="am-tileSub">audio order</span></span><span class="am-tileValue" id="studySequenceLabel">T→W→T</span></button>
+        </div>
+        <div class="am-tileGrid am-tileGrid--random">
+          <button class="am-tile" id="tgRandomSwap" type="button" onclick="AM.act('toggleRandomSwap', event)" title="Randomly swap Front and Back on the next card"><span class="am-tileGlyph">⇄</span><span class="am-tileText"><span class="am-tileLabel">Random</span><span class="am-tileSub">swap</span></span></button>
+          <button class="am-tile am-tile--value is-hidden" id="randomSwapChanceRow" type="button" onclick="AM.act('randomSwapChance', event)" title="Chance to swap the next card"><span class="am-tileGlyph">%</span><span class="am-tileText"><span class="am-tileLabel">Chance</span><span class="am-tileSub">next card</span></span><span class="am-tileValue" id="randomSwapChanceLabel">50%</span></button>
+        </div>
+      </section>
+
+      <section class="am-menuSection">
+        <div class="am-menuSectionTitle">Card</div>
+        <div class="am-tileGrid">
+          <button class="am-tile" id="tgSwap" type="button" onclick="AM.act('toggleSwap', event)"><span class="am-tileGlyph">↔</span><span class="am-tileText"><span class="am-tileLabel">Swap</span><span class="am-tileSub">sides</span></span></button>
+          <button class="am-tile" id="tgTypingMode" type="button" onclick="AM.act('toggleTypingMode', event)"><span class="am-tileGlyph">⌨</span><span class="am-tileText"><span class="am-tileLabel">Type</span><span class="am-tileSub">answer</span></span></button>
+          <button class="am-tile" id="tgHint" type="button" onclick="AM.act('toggleHint', event)"><span class="am-tileGlyph">✦</span><span class="am-tileText"><span class="am-tileLabel">Hint</span><span class="am-tileSub">show</span></span></button>
+          <button class="am-tile" id="tgAlwaysAnswer" type="button" onclick="AM.act('toggleAlwaysAnswer', event)"><span class="am-tileGlyph">A</span><span class="am-tileText"><span class="am-tileLabel">Answer</span><span class="am-tileSub">always</span></span></button>
+          <button class="am-tile" id="tgAutoDetails" type="button" onclick="AM.act('toggleAutoDetails', event)"><span class="am-tileGlyph">i</span><span class="am-tileText"><span class="am-tileLabel">Details</span><span class="am-tileSub">always</span></span></button>
+          <button class="am-tile" id="tgAutoShow" type="button" onclick="AM.act('toggleAutoShow', event)"><span class="am-tileGlyph">☷</span><span class="am-tileText"><span class="am-tileLabel">Comment</span><span class="am-tileSub">auto</span></span></button>
+          <button class="am-tile" id="tgImageFront" type="button" onclick="AM.act('toggleImageFront', event)"><span class="am-tileGlyph">▣</span><span class="am-tileText"><span class="am-tileLabel">Image</span><span class="am-tileSub">Front show</span></span></button>
+          <button class="am-tile" id="tgAutoImage" type="button" onclick="AM.act('toggleAutoImage', event)"><span class="am-tileGlyph">▣</span><span class="am-tileText"><span class="am-tileLabel">Image</span><span class="am-tileSub">Back auto</span></span></button>
+        </div>
+      </section>
+
+      <section class="am-menuSection">
+        <div class="am-menuSectionTitle">Appearance</div>
+        <div class="am-tileGrid">
+          <button class="am-tile" id="tgTheme" type="button" onclick="AM.act('toggleTheme', event)"><span class="am-tileGlyph">◐</span><span class="am-tileText"><span class="am-tileLabel">Light</span><span class="am-tileSub">theme</span></span></button>
+          <button class="am-tile" id="tgStopAudioButton" type="button" onclick="AM.act('toggleStopAudioButton', event)"><span class="am-tileGlyph">■</span><span class="am-tileText"><span class="am-tileLabel">Stop</span><span class="am-tileSub">audio button</span></span></button>
+        </div>
+        <div class="am-accentPicker" role="group" aria-label="Accent color">
+          <span class="am-accentPickerLabel">Accent</span>
+          <div class="am-accentSwatches">
+            <button class="am-accentSwatch" data-accent="coral" type="button" onclick="AM.act('setAccent', event, 'coral')" title="Coral" aria-label="Coral accent"></button>
+            <button class="am-accentSwatch" data-accent="orange" type="button" onclick="AM.act('setAccent', event, 'orange')" title="Orange" aria-label="Orange accent"></button>
+            <button class="am-accentSwatch" data-accent="yellow" type="button" onclick="AM.act('setAccent', event, 'yellow')" title="Yellow" aria-label="Yellow accent"></button>
+            <button class="am-accentSwatch" data-accent="green" type="button" onclick="AM.act('setAccent', event, 'green')" title="Green" aria-label="Green accent"></button>
+            <button class="am-accentSwatch" data-accent="forest" type="button" onclick="AM.act('setAccent', event, 'forest')" title="Forest green" aria-label="Forest green accent"></button>
+            <button class="am-accentSwatch" data-accent="teal" type="button" onclick="AM.act('setAccent', event, 'teal')" title="Teal" aria-label="Teal accent"></button>
+            <button class="am-accentSwatch" data-accent="blue" type="button" onclick="AM.act('setAccent', event, 'blue')" title="Blue" aria-label="Blue accent"></button>
+            <button class="am-accentSwatch" data-accent="indigo" type="button" onclick="AM.act('setAccent', event, 'indigo')" title="Indigo" aria-label="Indigo accent"></button>
+            <button class="am-accentSwatch" data-accent="purple" type="button" onclick="AM.act('setAccent', event, 'purple')" title="Purple" aria-label="Purple accent"></button>
+            <button class="am-accentSwatch" data-accent="pink" type="button" onclick="AM.act('setAccent', event, 'pink')" title="Pink" aria-label="Pink accent"></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="am-menuSection">
+        <div class="am-menuSectionTitle">Languages</div>
+        <div class="am-tileGrid">
+          <button class="am-tile am-tile--value" id="tgWordLanguage" type="button" onclick="AM.act('openLanguagePicker', event, 'word')" title="Choose the language spoken for the word"><span class="am-tileGlyph">A</span><span class="am-tileText"><span class="am-tileLabel">Word</span><span class="am-tileSub" id="wordLanguageName">English</span></span><span class="am-tileValue" id="wordLanguageLabel">EN</span></button>
+          <button class="am-tile am-tile--value" id="tgTranslationLanguage" type="button" onclick="AM.act('openLanguagePicker', event, 'translation')" title="Choose the language spoken for the translation"><span class="am-tileGlyph">T</span><span class="am-tileText"><span class="am-tileLabel">Translation</span><span class="am-tileSub" id="translationLanguageName">Russian</span></span><span class="am-tileValue" id="translationLanguageLabel">RU</span></button>
+          <button class="am-tile am-tile--value" id="voiceWord" type="button" onclick="AM.act('openVoicePicker', event, 'word')" title="Choose and preview the word voice"><span class="am-tileGlyph">♪</span><span class="am-tileText"><span class="am-tileLabel">Voice</span><span class="am-tileSub" id="voiceNameWord">System default</span></span><span class="am-tileValue" id="voiceWordLabel">EN</span></button>
+          <button class="am-tile am-tile--value" id="voiceTranslation" type="button" onclick="AM.act('openVoicePicker', event, 'translation')" title="Choose and preview the translation voice"><span class="am-tileGlyph">♪</span><span class="am-tileText"><span class="am-tileLabel">Voice</span><span class="am-tileSub" id="voiceNameTranslation">System default</span></span><span class="am-tileValue" id="voiceTranslationLabel">RU</span></button>
+          <button class="am-tile am-tile--value" id="speedWord" type="button" onclick="AM.act('speedLanguage', event, 'word')" title="Change the word speech speed"><span class="am-tileGlyph">1×</span><span class="am-tileText"><span class="am-tileLabel">Speed</span><span class="am-tileSub" id="speedWordName">Word</span></span><span class="am-tileValue" id="speedWordLabel">1.0×</span></button>
+          <button class="am-tile am-tile--value" id="speedTranslation" type="button" onclick="AM.act('speedLanguage', event, 'translation')" title="Change the translation speech speed"><span class="am-tileGlyph">1×</span><span class="am-tileText"><span class="am-tileLabel">Speed</span><span class="am-tileSub" id="speedTranslationName">Translation</span></span><span class="am-tileValue" id="speedTranslationLabel">1.0×</span></button>
+          <button class="am-tile" id="tgRecordedAudio" type="button" onclick="AM.act('toggleRecordedAudio', event)" title="Use MP3 audio from the card when it is available"><span class="am-tileGlyph">MP3</span><span class="am-tileText"><span class="am-tileLabel">Recorded audio</span><span class="am-tileSub">use if available</span></span></button>
+        </div>
+      </section>
+      <div class="am-menuCredit" aria-label="Author">by Remy</div>
+    </div>
+
+    <div class="am-languagePicker" id="amLanguagePicker" role="dialog" aria-modal="true" aria-label="Choose language" hidden>
+      <div class="am-languagePickerSheet">
+        <div class="am-languagePickerHead">
+          <div>
+            <div class="am-languagePickerTitle" id="amLanguagePickerTitle">Word language</div>
+            <div class="am-languagePickerSub" id="amLanguagePickerSub">Choose a language for speech</div>
+          </div>
+          <button class="am-languagePickerClose" type="button" onclick="AM.act('closeLanguagePicker', event)" aria-label="Close">×</button>
+        </div>
+        <input class="am-languageSearch" id="amLanguageSearch" type="search" inputmode="search" autocomplete="off" placeholder="Search languages" oninput="AM.filterPicker(this.value)">
+        <div class="am-languagePickerScroll">
+          <div class="am-languagePickerGroup" id="amLanguageRecentsGroup">
+            <div class="am-languagePickerGroupTitle">Recent</div>
+            <div class="am-languageRecents" id="amLanguageRecents"></div>
+          </div>
+          <div class="am-languagePickerGroup">
+            <div class="am-languagePickerGroupTitle" id="amLanguageListTitle">Languages</div>
+            <div class="am-languageList" id="amLanguageList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  if (typeof window.AM === 'undefined') {
+    console.error('AM object is not defined. Make sure Front.html is loaded first.');
+    return;
+  }
+
+  const CURRENT_SCRIPT = document.currentScript;
+  const CURRENT_ROOT = CURRENT_SCRIPT ? CURRENT_SCRIPT.closest('.am') : document.querySelector('.am[data-side="back"]');
+  const q = (s, r = CURRENT_ROOT || document) => r.querySelector(s);
+  const STUDY_SEQUENCE_ORDER = ['wt', 'tw', 'twt', 'wtw'];
+  const sGet = (k, d) => {
+    try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; }
+  };
+
+  AM.autoSpeakBack = function() {
+    const isStudyMode = sGet('am_studyMode', false);
+    if (!isStudyMode && !sGet('am_autoSpeakBack', false)) return;
+    if (this._autoSpeakBackTimer) clearTimeout(this._autoSpeakBackTimer);
+    this.setAudioStopVisible(true);
+    this._autoSpeakBackTimer = setTimeout(() => {
+      this._autoSpeakBackTimer = null;
+      const answer = this.firstVisible('.am-answerText span', CURRENT_ROOT)
+        || this.firstVisible('.am-answerText .am-front, .am-answerText .am-back', CURRENT_ROOT);
+      if (!answer) {
+        this.setAudioStopVisible(false);
+        return;
+      }
+
+      if (!isStudyMode) {
+        this.speak(answer.textContent, answer.dataset.lang, this.getAudioRole(answer));
+        return;
+      }
+
+      const translation = q('#amPrompt .am-back', CURRENT_ROOT)
+        || q('.am-answerText .am-back', CURRENT_ROOT);
+      const word = q('#amPrompt .am-front', CURRENT_ROOT)
+        || q('.am-answerText .am-front', CURRENT_ROOT);
+      if (!translation || !word) {
+        this.speak(answer.textContent, answer.dataset.lang, this.getAudioRole(answer));
+        return;
+      }
+
+      const cycles = Math.max(1, Math.min(3, Number(sGet('am_studyCycles', 1)) || 1));
+      const savedSequence = STUDY_SEQUENCE_ORDER.includes(sGet('am_studySequence', 'twt'))
+        ? sGet('am_studySequence', 'twt')
+        : 'twt';
+      // When Front/Back are swapped, the logical sequence must be mirrored as
+      // well: the default T→W→T becomes W→T→W.
+      const sequenceKey = sGet('am_swap', false)
+        ? ({ wt: 'tw', tw: 'wt', twt: 'wtw', wtw: 'twt' }[savedSequence] || savedSequence)
+        : savedSequence;
+      const sequences = {
+        wt: [
+          { key: 'word', element: word },
+          { key: 'translation', element: translation }
+        ],
+        tw: [
+          { key: 'translation', element: translation },
+          { key: 'word', element: word }
+        ],
+        twt: [
+          { key: 'translation', element: translation },
+          { key: 'word', element: word },
+          { key: 'translation', element: translation }
+        ],
+        wtw: [
+          { key: 'word', element: word },
+          { key: 'translation', element: translation },
+          { key: 'word', element: word }
+        ]
+      };
+
+      const items = [];
+      for (let i = 0; i < cycles; i++) {
+        for (const part of sequences[sequenceKey]) {
+          if (items.length && items[items.length - 1].key === part.key) continue;
+          items.push({ key: part.key, role: part.key, text: part.element.textContent, lang: part.element.dataset.lang });
+        }
+      }
+      this.speakSequence(items);
+    }, 300);
+  };
+
+  AM.toggleSection = function(id) {
+    const el = q('#' + id);
+    if (!el) return;
+    const showing = el.hidden;
+    this.setSectionVisible(el, showing, true);
+
+    if (id === 'amDetails' && showing) {
+      this.highlightExample();
+    }
+    if (id === 'amAnswerPanel' && showing) this.autoSpeakBack();
+  };
+
+  AM.playBlock = function(ev, lang) {
+    if (window.getSelection().toString().length > 0) return;
+    const el = ev.currentTarget.querySelector('.am-blockText');
+    if (el) {
+      // Only an Example has a matching recorded MP3. Description and Verb
+      // must keep using the normal TTS voice instead of replaying AudioWord.
+      const role = el.classList.contains('am-exampleText') ? 'example' : null;
+      this.speak(el.textContent, lang || this.getWordLanguage(), role);
+    }
+  };
+
+  AM.playAnswer = function(ev) {
+    if (window.getSelection().toString().length > 0) return;
+    const el = this.firstVisible('span', ev.currentTarget)
+      || this.firstVisible('.am-front, .am-back', ev.currentTarget);
+    if (el) this.speak(el.textContent, el.dataset.lang, this.getAudioRole(el));
+  };
+
+  // --- Example highlight (same underline as Hint) ---
+  const escapeRegExp = (str) => String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  const buildHintRegex = (rawFront) => {
+    const text = (rawFront || '').trim();
+    if (!text) return null;
+
+    const isSingleWord = text.indexOf(' ') === -1;
+    const escaped = escapeRegExp(text);
+    if (!isSingleWord) return new RegExp(escaped, 'gi');
+
+    const base = text.toLowerCase();
+    const variants = new Set([base]);
+
+    if (base.endsWith('y') && !/[aeiou]y$/.test(base)) variants.add(base.slice(0, -1) + 'ies');
+    else variants.add(base + 's');
+    variants.add(base + 'es');
+
+    if (base.endsWith('e')) variants.add(base + 'd');
+    else if (base.endsWith('y') && !/[aeiou]y$/.test(base)) variants.add(base.slice(0, -1) + 'ied');
+    else variants.add(base + 'ed');
+
+    if (base.endsWith('e') && base.length > 2) variants.add(base.slice(0, -1) + 'ing');
+    else variants.add(base + 'ing');
+
+    const group = Array.from(variants).map(v => escapeRegExp(v)).join('|');
+    return new RegExp('(^|[^A-Za-z0-9])(' + group + ')(?=[^A-Za-z0-9]|$)', 'gi');
+  };
+
+  AM.highlightExample = function() {
+    try {
+      const titles = Array.from((CURRENT_ROOT || document).querySelectorAll('.am-blockTitle'));
+      const t = titles.find(x => (x.textContent || '').trim().toLowerCase() === 'example');
+      if (!t) return;
+
+      const block = t.closest('.am-block');
+      if (!block) return;
+
+      const textEl = block.querySelector('.am-blockText');
+      if (!textEl) return;
+
+      const target = ((q('#amPrompt .am-front') || q('#amPrompt .am-back'))?.textContent || '').trim();
+      if (!target) return;
+
+      const rx = buildHintRegex(target);
+      if (!rx) return;
+
+      // Keep manual returns made in Anki. Depending on the editor/platform,
+      // they may arrive as <br>, separate paragraphs, real line feeds, or the
+      // literal characters "\\n" after a CSV import.
+      const readWithLineBreaks = (node) => {
+        const parts = [];
+        const visit = (current) => {
+          if (current.nodeType === Node.TEXT_NODE) {
+            parts.push(current.nodeValue || '');
+            return;
+          }
+          if (current.nodeType !== Node.ELEMENT_NODE) return;
+          if (current.tagName === 'BR') {
+            parts.push('\n');
+            return;
+          }
+          Array.from(current.childNodes).forEach(visit);
+          if (/^(DIV|P|LI)$/i.test(current.tagName) && current.nextSibling) parts.push('\n');
+        };
+        Array.from(node.childNodes).forEach(visit);
+        return parts.join('');
+      };
+      const raw = readWithLineBreaks(textEl)
+        .replace(/\\r\\n|\\n/g, '\n')
+        .replace(/\r\n?/g, '\n');
+      if (!raw.trim()) return;
+
+      rx.lastIndex = 0;
+      let html;
+      if (rx.source.startsWith('(^|')) {
+        html = raw.replace(rx, (m, g1, g2) => `${g1}<span class="am-hint-focus">${g2}</span>`);
+      } else {
+        html = raw.replace(rx, '<span class="am-hint-focus">$&</span>');
+      }
+
+      textEl.innerHTML = html.replace(/\n/g, '<br>');
+    } catch (e) {
+      console && console.error && console.error('highlightExample error', e);
+    }
+  };
+
+  AM.showDiff = function() {
+    if (!sGet('am_typingMode', false)) return;
+
+    const userAnsRaw = sessionStorage.getItem('userTypedAnswer') || '';
+    if (userAnsRaw.trim() === '') return;
+
+    const correctAnsEl = AM.firstVisible('.am-answerText span', CURRENT_ROOT)
+      || AM.firstVisible('.am-answerText .am-front, .am-answerText .am-back', CURRENT_ROOT);
+    if (!correctAnsEl) return;
+    const correctAnsRaw = correctAnsEl.textContent.trim();
+
+    const diffResult = q('#diffResult');
+    const diffTitle = q('#diffResult .am-blockTitle');
+    const diffOutput = q('#diffOutput');
+    if (!diffResult || !diffTitle || !diffOutput) return;
+
+    const userN = AM.normalizeForCompare(userAnsRaw);
+    const correctN = AM.normalizeForCompare(correctAnsRaw);
+    const isCorrect = userN === correctN;
+
+    if (isCorrect) {
+      diffTitle.textContent = 'Your answer is correct';
+      diffOutput.innerHTML = '<ins>' + correctAnsRaw + '</ins>';
+    } else {
+      diffTitle.textContent = 'Your answer is incorrect';
+
+      const userOneWord = userN.indexOf(' ') === -1;
+      const correctOneWord = correctN.indexOf(' ') === -1;
+
+      const d = (userOneWord && correctOneWord)
+        ? AM.diffCharsHTML(userAnsRaw.trim(), correctAnsRaw.trim())
+        : AM.diffWordsHTML(userAnsRaw, correctAnsRaw);
+
+      diffOutput.innerHTML =
+        '<div>' + d.userHTML + '</div>' +
+        '<div style="margin-top: 8px;">' + d.correctHTML + '</div>';
+    }
+
+    diffResult.hidden = false;
+    sessionStorage.removeItem('userTypedAnswer');
+  };
+
+  AM.initBack = function() {
+    try { localStorage.setItem('am_styleV2', 'true'); } catch (e) {}
+    const isLight = (function(){ try { return JSON.parse(localStorage.getItem('am_lightMode')||'false'); } catch(e){ return false; } })();
+    document.documentElement.classList.toggle('light-mode', !!isLight);
+    document.documentElement.classList.add('am-v2');
+
+    this._root = CURRENT_ROOT || this._root;
+    this.applyDeviceClass();
+    this.ensureFixedHost();
+    this.preloadRecordedAudio();
+
+    // The title/header is already rendered and remains stable. Only sections
+    // enabled by the current settings are revealed with the section animation.
+    this._sectionAnimationsReady = true;
+    this.syncUI();
+    this.highlightExample();
+    this.showDiff();
+
+    if (!q('#amAnswerPanel')?.hidden || sGet('am_studyMode', false)) this.autoSpeakBack();
+  };
+
+  AM.initBack();
+})();
+</script>
+</div>

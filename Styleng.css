@@ -1,0 +1,990 @@
+/* Переменные тем (ТЕМНАЯ по умолчанию) */
+:root {
+  --am-accent: #4ac4e2;
+  --am-accent-deep: #40adc8;
+  --am-accent-light: #78ccff;
+  --am-accent-bright: #63d8f2;
+  --am-accent-ink: #087e9b;
+  --am-accent-rgb: 74, 196, 226;
+  --am-accent-text: #fff;
+  --am-accent-ui: var(--am-accent-bright);
+  --am-active-tile-text: #fff;
+  --am-bg: #080c12;
+  --am-card-bg: rgba(18,22,32,.55);
+  --am-text-main: rgba(255,255,255,.92);
+  --am-text-sub: rgba(255,255,255,.68);
+  --am-border: rgba(255,255,255,.14);
+  --am-gradient-1: rgba(var(--am-accent-rgb), .18);
+  --am-gradient-2: rgba(var(--am-accent-rgb), .10);
+  --am-overlay-bg: rgba(0,0,0,0.4);
+  --am-menu-bg: rgba(18,22,32,.86);
+
+  /* Style tokens */
+  --am-radius: 20px;
+  --am-radius-sm: 16px;
+  --am-shadow: 0 14px 34px rgba(0,0,0,.15);
+  --am-head-grad: linear-gradient(180deg, var(--am-accent), var(--am-accent-deep));
+  --am-btn-grad: linear-gradient(180deg, var(--am-accent), var(--am-accent-deep));
+}
+
+/* V2: softer premium glass (enabled via .am-v2 on <html>) */
+:root.am-v2 {
+  --am-bg: #070a10;
+  --am-card-bg: rgba(22, 26, 38, .62);
+  --am-text-main: rgba(255,255,255,.92);
+  --am-text-sub: rgba(255,255,255,.68);
+  --am-border: rgba(255,255,255,.12);
+  --am-gradient-1: rgba(var(--am-accent-rgb), .22);
+  --am-gradient-2: rgba(var(--am-accent-rgb), .12);
+  --am-overlay-bg: rgba(0,0,0,0.46);
+  --am-menu-bg: rgba(22, 26, 38, .92);
+
+  --am-radius: 22px;
+  --am-radius-sm: 18px;
+  --am-shadow: 0 18px 46px rgba(0,0,0,.22);
+  --am-head-grad: linear-gradient(180deg, var(--am-accent-light), var(--am-accent));
+  --am-btn-grad: linear-gradient(180deg, var(--am-accent-light), var(--am-accent));
+}
+
+/* V2 + Light mode */
+:root.light-mode.am-v2 {
+  --am-bg: #f3f6fb;
+  --am-card-bg: rgba(255,255,255,.92);
+  --am-text-main: rgba(10, 18, 28, .92);
+  --am-text-sub: rgba(10, 18, 28, .60);
+  --am-border: rgba(10, 18, 28, .12);
+  --am-gradient-1: rgba(var(--am-accent-rgb), .16);
+  --am-gradient-2: rgba(var(--am-accent-rgb), .08);
+  --am-overlay-bg: rgba(0,0,0,0.14);
+  --am-menu-bg: rgba(255,255,255,.94);
+  --am-accent-ui: var(--am-accent-ink);
+  --am-active-tile-text: rgba(10,18,28,.94);
+
+  --am-shadow: 0 16px 38px rgba(10, 20, 40, .10);
+  --am-head-grad: linear-gradient(180deg, var(--am-accent-light), var(--am-accent));
+  --am-btn-grad: linear-gradient(180deg, var(--am-accent-light), var(--am-accent));
+}
+
+:root[data-am-accent="purple"] { --am-accent: #a78bfa; --am-accent-deep: #7c3aed; --am-accent-light: #c4b5fd; --am-accent-bright: #c4b5fd; --am-accent-ink: #6d28d9; --am-accent-rgb: 167, 139, 250; --am-accent-text: #fff; }
+:root[data-am-accent="green"] { --am-accent: #34d399; --am-accent-deep: #059669; --am-accent-light: #6ee7b7; --am-accent-bright: #6ee7b7; --am-accent-ink: #047857; --am-accent-rgb: 52, 211, 153; --am-accent-text: #fff; }
+:root[data-am-accent="pink"] { --am-accent: #f472b6; --am-accent-deep: #db2777; --am-accent-light: #f9a8d4; --am-accent-bright: #f9a8d4; --am-accent-ink: #be185d; --am-accent-rgb: 244, 114, 182; --am-accent-text: #fff; }
+:root[data-am-accent="yellow"] { --am-accent: #facc15; --am-accent-deep: #d97706; --am-accent-light: #fde68a; --am-accent-bright: #fde68a; --am-accent-ink: #9a6700; --am-accent-rgb: 250, 204, 21; --am-accent-text: #fff; }
+:root[data-am-accent="orange"] { --am-accent: #fb923c; --am-accent-deep: #ea580c; --am-accent-light: #fdba74; --am-accent-bright: #fdba74; --am-accent-ink: #c2410c; --am-accent-rgb: 251, 146, 60; --am-accent-text: #fff; }
+:root[data-am-accent="indigo"] { --am-accent: #6366f1; --am-accent-deep: #4338ca; --am-accent-light: #a5b4fc; --am-accent-bright: #a5b4fc; --am-accent-ink: #4338ca; --am-accent-rgb: 99, 102, 241; --am-accent-text: #fff; }
+:root[data-am-accent="teal"] { --am-accent: #14b8a6; --am-accent-deep: #0f766e; --am-accent-light: #5eead4; --am-accent-bright: #5eead4; --am-accent-ink: #0f766e; --am-accent-rgb: 20, 184, 166; --am-accent-text: #fff; }
+:root[data-am-accent="coral"] { --am-accent: #fb7185; --am-accent-deep: #e11d48; --am-accent-light: #fda4af; --am-accent-bright: #fda4af; --am-accent-ink: #be123c; --am-accent-rgb: 251, 113, 133; --am-accent-text: #fff; }
+:root[data-am-accent="forest"] { --am-accent: #22c55e; --am-accent-deep: #15803d; --am-accent-light: #86efac; --am-accent-bright: #86efac; --am-accent-ink: #15803d; --am-accent-rgb: 34, 197, 94; --am-accent-text: #fff; }
+
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100% !important;
+
+  /* Paint gradient directly on the page background (more reliable on iOS AnkiMobile) */
+  background:
+    radial-gradient(1200px 700px at 20% 0%, var(--am-gradient-1), transparent 55%),
+    radial-gradient(900px 600px at 90% 10%, var(--am-gradient-2), transparent 60%),
+    var(--am-bg) !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+}
+
+body::before { display: none !important; }
+
+.card {
+  min-height: 100vh !important;
+  min-height: -webkit-fill-available !important;
+  padding: 14px 12px calc(18px + env(safe-area-inset-bottom)) !important;
+  font-family: ui-sans-serif, system-ui, -apple-system;
+  color: var(--am-text-main);
+  background: transparent !important;
+}
+
+.am { max-width: 980px; margin: 0 auto; }
+
+.am-card {
+  border-radius: var(--am-radius);
+  overflow: hidden;
+  border: 0.5px solid var(--am-border);
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background: var(--am-card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--am-shadow);
+  transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* V2: a touch more depth on the main card */
+:root.am-v2 .am-card {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+:root.am-v2 .am-card:active {
+  transform: translateY(1px);
+}
+
+.am-enter {
+  /* Keep the card visible immediately. iOS/WKWebView can briefly show a blank card
+     when the element starts from opacity:0 during front/back swaps. */
+  opacity: 1;
+  transform: translateY(0);
+  animation: amIn 220ms cubic-bezier(.2,.9,.2,1);
+  will-change: transform, opacity;
+}
+
+@keyframes amIn {
+  from { opacity: .985; transform: translateY(4px); }
+  to   { opacity: 1;    transform: translateY(0); }
+}
+
+/* Шапка */
+.am-head {
+  background: var(--am-head-grad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 12px;
+  min-height: 64px;
+}
+
+.am-title {
+  font-weight: 900;
+  font-size: clamp(22px, 7vw, 36px);
+  color: var(--am-accent-text);
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0,0,0,.18);
+}
+
+.am-clickable {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: filter 0.15s ease;
+}
+
+.am-clickable:active {
+  filter: brightness(90%);
+}
+
+.am-actions { padding: 14px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+.am-answer { padding: 0 14px 14px; }
+.am-answerTitle { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--am-text-sub); margin: 6px 0 8px; text-align: center; }
+
+.am-answerText {
+  font-size: clamp(16px, 4.6vw, 22px);
+  font-weight: 850;
+  padding: 12px;
+  text-align: center;
+  color: var(--am-text-main);
+  background: rgba(128,128,128,.1);
+  border: 1px solid var(--am-border);
+  border-radius: var(--am-radius-sm);
+}
+.am-imagePanel {
+  margin: 0 14px 14px;
+  padding: 7px;
+  overflow: hidden;
+  border: 1px solid var(--am-border);
+  border-radius: var(--am-radius-sm);
+  background: rgba(128,128,128,.08);
+}
+.am-imagePanel img {
+  display: block;
+  width: 100%;
+  max-height: 430px;
+  max-height: min(430px, 48dvh);
+  margin: 0 auto;
+  border-radius: calc(var(--am-radius-sm) - 6px);
+  object-fit: contain;
+}
+
+/*
+  Keep the native players visually invisible without using display:none.
+  iOS is much more willing to preload a locally stored Anki MP3 when its
+  element remains renderable; that prevents a pause before the next item in
+  a study-mode sequence.
+*/
+.am-recordedAudioSource,
+.am-sequenceAudio {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.am-btn {
+  border: 1px solid rgba(var(--am-accent-rgb), .48);
+  background: var(--am-btn-grad);
+  color: var(--am-accent-text);
+  text-shadow: 0 1px 2px rgba(0,0,0,.16);
+  padding: 12px 14px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 14px;
+  transition: transform 0.15s ease;
+}
+
+.am-btn:active { transform: scale(0.96); }
+
+.am-panel { padding: 0 14px 14px; }
+
+@keyframes am-section-in {
+  from { opacity: 0; transform: translateY(-14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes am-section-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-12px); }
+}
+.am-sectionIn {
+  animation: am-section-in .22s cubic-bezier(.22,.8,.24,1) both;
+  will-change: opacity, transform;
+}
+.am-sectionOut {
+  animation: am-section-out .16s ease-in both;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .am-sectionIn, .am-sectionOut { animation: none; }
+}
+
+.am-block {
+  margin-top: 10px;
+  background: rgba(128,128,128,.08);
+  border: 1px solid var(--am-border);
+  border-radius: var(--am-radius-sm);
+  padding: 12px;
+  padding: 12px;
+}
+
+.am-blockTitle {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--am-text-sub);
+  margin-bottom: 6px;
+  text-align: left;
+}
+
+.am-blockText,
+.am-blockText.am-exampleText,
+.am-panel .am-blockText {
+  font-size: clamp(15px, 4.2vw, 20px);
+  font-weight: 750;
+  color: var(--am-text-main);
+  text-align: left;
+  /* Anki may keep a manual return as a literal line feed. Show it on
+     Desktop, AnkiMobile, and AnkiDroid while preserving normal <br> tags. */
+  /* The explicit selectors and !important are intentional: Anki Desktop,
+     AnkiMobile and AnkiDroid may inject a more specific editor rule. */
+  white-space: pre-line !important;
+}
+
+/* Example highlighting rebuilds its HTML, so the rule above also keeps its
+   original manual line breaks visible afterwards. */
+
+.am-floatPanel { margin-top: 12px; border-radius: var(--am-radius); border: 1px solid var(--am-border); background: var(--am-card-bg); overflow: hidden; box-shadow: 0 12px 30px rgba(0,0,0,.1); }
+.am-floatTitle { padding: 10px 12px; background: rgba(128,128,128,.06); font-weight: 900; font-size: 13px; color: var(--am-text-sub); text-align: center; }
+.am-floatText { padding: 12px; font-size: clamp(15px, 4.2vw, 20px); color: var(--am-text-main); text-align: center; }
+
+.am-fixed-wrap {
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.am-overlay {
+  position: fixed !important;
+  inset: 0;
+  background: var(--am-overlay-bg);
+  z-index: 10001;
+  pointer-events: auto;
+}
+
+.am-menu {
+  position: fixed !important;
+  left: 14px !important;
+  bottom: calc(84px + env(safe-area-inset-bottom)) !important;
+  width: min(370px, calc(100vw - 28px));
+  max-height: calc(100vh - 112px);
+  max-height: calc(100dvh - 112px);
+  border-radius: var(--am-radius);
+  border: 1px solid var(--am-border);
+  background: var(--am-menu-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 14px;
+  z-index: 10003;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  transition: opacity 0.35s cubic-bezier(.2,.9,.2,1), transform 0.35s cubic-bezier(.2,.9,.2,1);
+  pointer-events: auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.am-menu::-webkit-scrollbar { display: none; }
+.am-fixed-wrap.am-audio-active .am-menu {
+  bottom: calc(154px + env(safe-area-inset-bottom)) !important;
+  max-height: calc(100vh - 182px);
+  max-height: calc(100dvh - 182px);
+}
+
+.am-languagePicker {
+  position: fixed !important;
+  inset: 0;
+  z-index: 10010;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
+  background: rgba(0,0,0,.56);
+  pointer-events: auto;
+}
+.am-languagePicker[hidden] { display: none !important; }
+.am-languagePickerSheet {
+  width: min(520px, 100%);
+  max-height: min(680px, calc(100dvh - 28px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--am-border);
+  border-radius: 24px;
+  background: var(--am-menu-bg);
+  box-shadow: 0 20px 54px rgba(0,0,0,.38);
+}
+.am-languagePickerHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 15px 11px;
+}
+.am-languagePickerTitle { color: var(--am-text-main); font-size: 16px; font-weight: 950; letter-spacing: -.015em; }
+.am-languagePickerSub { margin-top: 3px; color: var(--am-text-sub); font-size: 11px; font-weight: 750; }
+.am-languagePickerClose {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--am-border);
+  border-radius: 11px;
+  background: rgba(128,128,128,.12);
+  color: var(--am-text-main);
+  font: 900 24px/28px Arial, sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.am-languageSearch {
+  width: calc(100% - 30px);
+  margin: 0 15px 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--am-border);
+  border-radius: 12px;
+  outline: none;
+  background: rgba(128,128,128,.10);
+  color: var(--am-text-main);
+  font: inherit;
+  font-size: 14px;
+  -webkit-appearance: none;
+}
+.am-languageSearch:focus { border-color: rgba(var(--am-accent-rgb), .78); }
+.am-languagePickerScroll {
+  padding: 2px 15px 15px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.am-languagePickerGroup + .am-languagePickerGroup { margin-top: 14px; }
+.am-languagePickerGroupTitle { margin: 0 2px 8px; color: var(--am-text-sub); font-size: 10px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.am-languageRecents { display: flex; flex-wrap: wrap; gap: 7px; }
+.am-languageRecent {
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid var(--am-border);
+  border-radius: 11px;
+  background: rgba(128,128,128,.10);
+  color: var(--am-text-main);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 850;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.am-languageRecent.is-selected { border-color: rgba(var(--am-accent-rgb), .74); color: var(--am-accent-ui); background: rgba(var(--am-accent-rgb), .16); }
+.am-languageList { display: grid; gap: 7px; }
+.am-languageOption {
+  width: 100%;
+  min-height: 52px;
+  padding: 9px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(128,128,128,.18);
+  border-radius: 14px;
+  background: rgba(128,128,128,.08);
+  color: var(--am-text-main);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.am-languageOption:active, .am-languageRecent:active, .am-languagePickerClose:active { transform: scale(.98); }
+.am-languageOptionCode {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: rgba(var(--am-accent-rgb), .12);
+  color: var(--am-accent-ui);
+  font-size: 11px;
+  font-weight: 950;
+}
+.am-languageOptionText { min-width: 0; flex: 1; }
+.am-languageOptionName { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; font-weight: 900; }
+.am-languageOptionMeta { margin-top: 2px; color: var(--am-text-sub); font-size: 10px; font-weight: 750; }
+.am-languageOptionCheck { flex: 0 0 auto; color: var(--am-accent-ui); font-size: 17px; font-weight: 950; }
+.am-languageOption.is-selected { border-color: rgba(var(--am-accent-rgb), .74); background: rgba(var(--am-accent-rgb), .15); }
+.am-voiceOptionRow { display: flex; align-items: stretch; gap: 7px; }
+.am-voiceOptionRow .am-languageOption { flex: 1; min-width: 0; }
+.am-voicePreview {
+  flex: 0 0 46px;
+  width: 46px;
+  min-height: 52px;
+  border: 1px solid rgba(var(--am-accent-rgb), .55);
+  border-radius: 14px;
+  background: rgba(var(--am-accent-rgb), .14);
+  color: var(--am-accent-ui);
+  font: 950 16px/1 Arial, sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.am-voicePreview:active { transform: scale(.96); background: rgba(var(--am-accent-rgb), .25); }
+
+.am-gear {
+  /* iOS WebView плохо дружит с position:fixed на круглых кнопках,
+     поэтому делаем кнопку absolute внутри fixed-обёртки */
+  position: absolute !important;
+  left: 14px !important;
+  bottom: calc(24px + env(safe-area-inset-bottom)) !important;
+
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 10004;
+  pointer-events: auto;
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+
+  /* НИКАКИХ blur/filter/box-shadow — именно они чаще всего “копятся” в WebView */
+  box-shadow: none !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  /* Базовый вид (dark) */
+  background: rgba(18, 22, 32, 0.92);
+  border: 1px solid var(--am-border);
+}
+
+/* Light mode: чтобы не было “чёрного круга” */
+:root.light-mode .am-gear {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(10, 18, 28, 0.14);
+}
+
+:root.light-mode .am-gear svg {
+  fill: rgba(10, 18, 28, 0.86);
+  opacity: 1;
+}
+
+
+.am-gear svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--am-text-main);
+  opacity: 0.9;
+  /* AnkiMobile must see the BUTTON itself as the tap target, not the SVG path. */
+  pointer-events: none;
+}
+
+.am-stopAudio {
+  position: absolute !important;
+  left: 14px !important;
+  right: auto !important;
+  bottom: calc(90px + env(safe-area-inset-bottom)) !important;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10004;
+  pointer-events: auto;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,.32);
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ff6a7d, #e84e65);
+  color: #fff;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  box-shadow: none !important;
+  transition: transform .16s ease, opacity .16s ease;
+}
+.am-stopAudio[hidden] { display: none !important; }
+.am-stopAudio:active { transform: scale(.93); }
+.am-stopAudio svg { width: 22px; height: 22px; fill: currentColor; pointer-events: none; }
+
+.am-menu:not([hidden]) {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.am-menuHead { display: flex; align-items: center; justify-content: space-between; margin: 1px 2px 12px; }
+.am-menuTitle { margin: 0; font-weight: 950; font-size: 17px; letter-spacing: -.02em; color: var(--am-text-main); }
+.am-menuSubtitle { margin-top: 2px; color: var(--am-text-sub); font-size: 11px; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; }
+.am-menuCredit { padding: 13px 2px 1px; color: var(--am-text-sub); font-size: 10px; font-weight: 700; letter-spacing: .08em; opacity: .42; text-align: center; user-select: none; }
+
+.am-menuSection + .am-menuSection { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--am-border); }
+.am-menuSectionTitle { margin: 0 2px 8px; color: var(--am-text-sub); font-size: 10px; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+.am-tileGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.am-tileGrid--random { margin-top: 8px; }
+
+.am-accentPicker {
+  display: block;
+  margin-top: 8px;
+  padding: 9px 10px;
+  border: 1px solid rgba(128,128,128,.20);
+  border-radius: 14px;
+  background: rgba(128,128,128,.08);
+}
+.am-accentPickerLabel { display: block; color: var(--am-text-sub); font-size: 11px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+.am-accentSwatches { display: grid; grid-template-columns: repeat(10, 27px); justify-content: space-between; gap: 0; margin-top: 8px; }
+.am-accentSwatch {
+  --am-swatch: #4ac4e2;
+  --am-swatch-text: #fff;
+  position: relative;
+  flex: 0 0 27px;
+  width: 27px;
+  height: 27px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: var(--am-swatch);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.26), 0 2px 5px rgba(0,0,0,.20);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.am-accentSwatch[data-accent="purple"] { --am-swatch: #8b5cf6; }
+.am-accentSwatch[data-accent="green"] { --am-swatch: #22c55e; --am-swatch-text: #082a1b; }
+.am-accentSwatch[data-accent="pink"] { --am-swatch: #ec4899; --am-swatch-text: #351020; }
+.am-accentSwatch[data-accent="yellow"] { --am-swatch: #facc15; --am-swatch-text: #2d2100; }
+.am-accentSwatch[data-accent="orange"] { --am-swatch: #fb923c; --am-swatch-text: #2a1205; }
+.am-accentSwatch[data-accent="indigo"] { --am-swatch: #6366f1; }
+.am-accentSwatch[data-accent="teal"] { --am-swatch: #14b8a6; --am-swatch-text: #062720; }
+.am-accentSwatch[data-accent="coral"] { --am-swatch: #fb7185; }
+.am-accentSwatch[data-accent="forest"] { --am-swatch: #22c55e; --am-swatch-text: #082918; }
+.am-accentSwatch::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--am-swatch-text);
+  font: 950 15px/1 Arial, sans-serif;
+  opacity: 0;
+}
+.am-accentSwatch.is-selected {
+  border-color: var(--am-menu-bg);
+  outline: 2px solid var(--am-swatch);
+  outline-offset: 1px;
+  transform: scale(1.06);
+}
+.am-accentSwatch.is-selected::after { opacity: 1; }
+.am-accentSwatch:active { transform: scale(.92); }
+
+.am-tile {
+  position: relative;
+  min-width: 0;
+  min-height: 64px;
+  padding: 9px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(128,128,128,.20);
+  border-radius: 16px;
+  background: rgba(128,128,128,.11);
+  color: var(--am-text-main);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.am-tile:active { transform: scale(.97); }
+.am-tileGlyph {
+  flex: 0 0 29px;
+  width: 29px;
+  height: 29px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(var(--am-accent-rgb), .12);
+  color: var(--am-accent-ui);
+  font-size: 12px;
+  font-weight: 950;
+  line-height: 1;
+}
+.am-tileText { min-width: 0; flex: 1; }
+.am-tileLabel, .am-tileSub { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.am-tileLabel { font-size: 13px; font-weight: 900; line-height: 1.12; }
+.am-tileSub { margin-top: 3px; color: var(--am-text-sub); font-size: 10px; font-weight: 750; line-height: 1; }
+.am-tileValue {
+  flex: 0 0 auto;
+  padding: 5px 6px;
+  border-radius: 9px;
+  background: rgba(var(--am-accent-rgb), .14);
+  color: var(--am-accent-ui);
+  font-size: 11px;
+  font-weight: 950;
+  line-height: 1;
+}
+.am-tile.is-on {
+  border-color: rgba(var(--am-accent-rgb), .78);
+  background: linear-gradient(135deg, rgba(var(--am-accent-rgb), .33), rgba(var(--am-accent-rgb), .17));
+  box-shadow: 0 8px 22px rgba(var(--am-accent-rgb), .18), inset 0 1px 0 rgba(255,255,255,.16);
+  color: var(--am-active-tile-text);
+}
+.am-tile.is-on .am-tileGlyph { background: rgba(255,255,255,.20); color: var(--am-active-tile-text); }
+.am-tile.is-on .am-tileSub { color: var(--am-active-tile-text); opacity: .78; }
+.am-tile.is-on .am-tileValue { background: rgba(255,255,255,.20); color: var(--am-active-tile-text); }
+
+/* ---------------- Anki Desktop menu ----------------
+   Mobile keeps the larger, touch-friendly layout above. Desktop needs a
+   denser panel and strict button dimensions because Anki Desktop can add
+   native button padding otherwise. */
+:root.am-desktop .am-gear,
+:root.am-desktop .am-stopAudio {
+  box-sizing: border-box !important;
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  min-height: 58px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+}
+:root.am-desktop .am-gear {
+  left: 16px !important;
+  bottom: 20px !important;
+}
+:root.am-desktop .am-stopAudio {
+  left: 16px !important;
+  bottom: 88px !important;
+}
+:root.am-desktop .am-menu {
+  left: 16px !important;
+  bottom: 92px !important;
+  width: min(396px, calc(100vw - 32px));
+  max-height: calc(100vh - 120px);
+  max-height: calc(100dvh - 120px);
+  padding: 12px;
+}
+:root.am-desktop .am-fixed-wrap.am-audio-active .am-menu {
+  bottom: 162px !important;
+  max-height: calc(100vh - 190px);
+  max-height: calc(100dvh - 190px);
+}
+:root.am-desktop .am-menuHead { margin: 0 1px 9px; }
+:root.am-desktop .am-menuCredit { padding-top: 10px; font-size: 9px; }
+:root.am-desktop .am-menuSection + .am-menuSection { margin-top: 9px; padding-top: 9px; }
+:root.am-desktop .am-menuSectionTitle { margin-bottom: 6px; }
+:root.am-desktop .am-tileGrid { gap: 7px; }
+:root.am-desktop .am-tileGrid--random { margin-top: 7px; }
+:root.am-desktop .am-tile {
+  box-sizing: border-box;
+  min-height: 62px;
+  margin: 0 !important;
+  padding: 8px;
+  gap: 7px;
+}
+:root.am-desktop .am-tileGlyph {
+  flex-basis: 28px;
+  width: 28px;
+  height: 28px;
+}
+:root.am-desktop .am-accentPicker { margin-top: 7px; padding: 8px 9px; }
+:root.am-desktop .am-accentSwatches {
+  grid-template-columns: repeat(10, 27px);
+  justify-content: space-between;
+  gap: 0;
+  margin-top: 7px;
+}
+:root.am-desktop .am-accentSwatch {
+  box-sizing: border-box;
+  margin: 0 !important;
+}
+
+/* Light theme: clearer surfaces and borders for users who prefer it. */
+:root.light-mode .am-menu,
+:root.light-mode .am-languagePickerSheet {
+  border-color: rgba(10,18,28,.14);
+  box-shadow: 0 18px 42px rgba(20,35,55,.16);
+}
+:root.light-mode .am-tile,
+:root.light-mode .am-accentPicker,
+:root.light-mode .am-languageOption,
+:root.light-mode .am-languageRecent,
+:root.light-mode .am-languageSearch,
+:root.light-mode .am-languagePickerClose {
+  border-color: rgba(10,18,28,.12);
+  background: rgba(255,255,255,.72);
+}
+:root.light-mode .am-answerText,
+:root.light-mode .am-imagePanel,
+:root.light-mode .am-block {
+  border-color: rgba(10,18,28,.11);
+  background: rgba(10,18,28,.035);
+}
+:root.light-mode .am-tile.is-on {
+  background: linear-gradient(135deg, rgba(var(--am-accent-rgb), .28), rgba(var(--am-accent-rgb), .13));
+  box-shadow: 0 7px 18px rgba(var(--am-accent-rgb), .16), inset 0 1px 0 rgba(255,255,255,.74);
+}
+:root.light-mode .am-tile.is-on .am-tileGlyph,
+:root.light-mode .am-tile.is-on .am-tileValue { background: rgba(255,255,255,.50); }
+
+/* Legacy controls stay available if an older side of a card is still in memory. */
+.am-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 8px; }
+.am-row + .am-row { border-top: 1px solid var(--am-border); }
+.am-rowMain { font-weight: 900; font-size: 14px; color: var(--am-text-main); }
+.am-toggle { width: 52px; height: 30px; border-radius: 999px; border: 1px solid var(--am-border); background: rgba(128,128,128,.2); position: relative; }
+.am-toggle span { position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 999px; background: white; transition: transform .18s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+.am-toggle.is-on { background: var(--am-accent); border-color: var(--am-accent); }
+.am-toggle.is-on span { transform: translateX(22px); }
+
+/* Typing mode */
+#diffResult { margin-left: 14px; margin-right: 14px; }
+
+.am-typing-input {
+  width: 90%;
+  margin: 10px auto 0;
+  padding: 8px 12px;
+  font-size: 1.1em;
+  border-radius: 6px;
+  border: 1px solid rgba(128,128,128,0.3);
+  background-color: var(--am-card-bg);
+  color: var(--am-text-main); /* fixed */
+  display: block;
+}
+
+#diffOutput del { background-color: #ffebe9; color: #c00; text-decoration: none; }
+#diffOutput ins { background-color: #e6ffec; color: #060; text-decoration: none; }
+
+.am-cloze-area {
+  padding: 10px 15px;
+  border-top: 1px solid rgba(128,128,128,0.2);
+  margin-top: 10px;
+  color: var(--am-text-sub); /* fixed (was --am-text-secondary) */
+}
+
+.am-cloze-blank { font-weight: bold; color: var(--am-accent-ui); }
+.is-hidden { display: none !important; }
+
+/* iOS/WebView pinning fallback: emulate fixed with JS using absolute positioning */
+:root.am-ios .am-fixed-wrap { position: absolute !important; }
+:root.am-ios .am-gear,
+:root.am-ios .am-stopAudio,
+:root.am-ios .am-menu,
+:root.am-ios .am-overlay,
+:root.am-ios .am-languagePicker {
+  position: absolute !important;
+}
+
+/* Hint */
+.am-hint {
+  margin: 10px 14px 14px;
+  padding: 12px;
+  background: rgba(255, 193, 7, 0.15);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  border-radius: 12px;
+  text-align: center;
+  color: var(--am-text-main);
+  font-size: 0.95em;
+  line-height: 1.4;
+  opacity: 0;
+  transform: translateY(-5px) scale(0.98);
+  transition: opacity 0.35s cubic-bezier(.2,.9,.2,1), transform 0.35s cubic-bezier(.2,.9,.2,1);
+}
+
+.am-hint:not([hidden]) {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.am-hint--speak {
+  cursor: pointer;
+}
+
+.am-hint--speak:active {
+  filter: brightness(92%);
+}
+
+.am-hint-cloze {
+  font-weight: bold;
+  color: var(--am-accent-ui);
+  background: rgba(var(--am-accent-rgb), .10);
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+.am-hint-focus {
+  font-weight: 900;
+  color: var(--am-accent-ui);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+
+
+
+/* ---------------- iOS / AnkiMobile stability pack ----------------
+   На iPhone WebView иногда “накапливает” полупрозрачные края/тени/blur при смене карточек.
+   Здесь мы убираем самые частые триггеры: backdrop-filter, анимации и fixed-псевдофон. */
+@supports (-webkit-touch-callout: none) {
+
+  /* Убираем фиксированный псевдо-фон (часто даёт следы под fixed UI) */
+  body::before { display: none !important; }
+
+
+  /* Возвращаем красивый фон БЕЗ fixed-псевдоэлемента (iOS WebView меньше глючит) */
+  body {
+    background:
+      radial-gradient(1200px 700px at 20% 0%, var(--am-gradient-1), transparent 55%),
+      radial-gradient(900px 600px at 90% 10%, var(--am-gradient-2), transparent 60%),
+      var(--am-bg) !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+  }
+
+  /* Выключаем entrance-анимацию и активный translate (меньше перерисовок) */
+  .am-enter { animation: none !important; opacity: 1 !important; transform: none !important; }
+  :root.am-v2 .am-card:active { transform: none !important; }
+
+  /* Убираем blur (главный источник артефактов в iOS WebView) */
+  .am-card,
+  .am-menu {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Тени на больших блоках тоже лучше отключить на iOS */
+  .am-card { box-shadow: none !important; }
+  .am-menu { box-shadow: none !important; }
+
+  /* На iOS убираем почти все анимации/active-эффекты,
+     потому что именно в них WKWebView часто даёт краткий blank/flash. */
+  html, body, .card, .am, .am-card, .am-head, .am-panel, .am-answer, .am-floatPanel,
+  .am-hint, .am-menu, .am-overlay, .am-btn, .am-tile, .am-toggle span, .am-clickable {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Only these compact section animations stay enabled on iPhone. They use
+     opacity/transform only, so they do not bring back the old WebView flashes. */
+  @media (prefers-reduced-motion: no-preference) {
+    .am-panel.am-sectionIn,
+    .am-answer.am-sectionIn,
+    .am-imagePanel.am-sectionIn,
+    .am-floatPanel.am-sectionIn,
+    .am-typingArea.am-sectionIn {
+      animation: am-section-in .22s cubic-bezier(.22,.8,.24,1) both !important;
+    }
+    .am-hint.am-sectionIn {
+      animation: am-section-in .34s cubic-bezier(.22,.8,.24,1) both !important;
+    }
+    .am-panel.am-sectionOut,
+    .am-answer.am-sectionOut,
+    .am-imagePanel.am-sectionOut,
+    .am-floatPanel.am-sectionOut,
+    .am-hint.am-sectionOut,
+    .am-typingArea.am-sectionOut {
+      animation: am-section-out .16s ease-in both !important;
+    }
+  }
+
+  .am-clickable:active,
+  .am-hint--speak:active,
+  .am-btn:active {
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .am-head,
+  .am-card,
+  .am-fixed-wrap,
+  .am-overlay,
+  .am-gear,
+  .am-stopAudio {
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+  }
+
+  .am-menu:not([hidden]),
+  .am-hint:not([hidden]):not(.am-sectionIn):not(.am-sectionOut) {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Фикс-обёртку держим в отдельном слое */
+  .am-fixed-wrap {
+    will-change: transform;
+  }
+
+  /* Чтобы границы НЕ “накручивались”, делаем их непрозрачными на iOS */
+  .am-gear {
+    background: #121620 !important;
+    border-color: #2b3440 !important;
+  }
+  :root.light-mode .am-gear {
+    background: #ffffff !important;
+    border-color: #cfd6df !important;
+  }
+}
+
+
+/* --- iOS anti-flash safeguards --- */
+html, body, body.card, #qa {
+  background-color: var(--am-bg) !important;
+}
+#qa { background: transparent !important; }

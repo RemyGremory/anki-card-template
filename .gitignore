@@ -1,0 +1,25 @@
+# The Voice Studio application has its own repository.
+Anki Voice Studio/
+
+# Personal helper files and test material are not part of the template.
+anki_audio_drag_helper/
+Front друга.html
+generate_norwegian_tts.py
+MP3_audio_drag_helper.ankiaddon
+norwegian-test.mp3
+yield-give-way.png
+Prepare template for GitHub.cmd
+
+# Keep private Anki collections and media out of the repository.
+*.anki2
+*.apkg
+*.mp3
+*.wav
+*.m4a
+*.flac
+*.png
+*.jpg
+*.jpeg
+*.webp
+Thumbs.db
+Desktop.ini
