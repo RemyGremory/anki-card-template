@@ -90,5 +90,3 @@ of the `Audio…` fields.
   voices may not always be exposed to Anki’s browser engine, so recorded MP3
   audio is the most reliable way to get the same voice everywhere.
 - The template does not include cards, images, personal audio, or voice data.
-
-Created by Remy.
