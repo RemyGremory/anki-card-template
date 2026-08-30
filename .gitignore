@@ -21,5 +21,8 @@ Prepare template for GitHub.cmd
 *.jpg
 *.jpeg
 *.webp
+
+# README screenshots are public documentation, not private Anki media.
+!assets/screenshots/*.jpg
 Thumbs.db
 Desktop.ini
