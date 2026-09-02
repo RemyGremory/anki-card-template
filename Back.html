@@ -112,10 +112,10 @@ html, body, body.card, #qa, .card{
     {{/Image}}
 
     <div class="am-actions am-actions--bottom">
-      <button class="am-btn" onclick="AM.toggleSection('amDetails')">Details</button>
-      <button class="am-btn" onclick="AM.toggleSection('amAnswerPanel')">Answer</button>
-      {{#Image}}<button class="am-btn" onclick="AM.toggleSection('amImagePanel')">Image</button>{{/Image}}
-      <button class="am-btn" onclick="AM.toggleSection('amComment')">Comment</button>
+      <button class="am-btn am-actionBtn am-actionBtn--text" onclick="AM.toggleSection('amDetails')" type="button" title="Show details" aria-label="Show details"><span class="am-actionLabel">Info</span></button>
+      <button class="am-btn am-actionBtn am-actionBtn--text" onclick="AM.toggleSection('amAnswerPanel')" type="button" title="Show answer" aria-label="Show answer"><span class="am-actionLabel">Answer</span></button>
+      {{#Image}}<button class="am-btn am-actionBtn am-actionBtn--icon" onclick="AM.toggleSection('amImagePanel')" type="button" title="Show image" aria-label="Show image"><svg class="am-actionIcon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2"></rect><circle cx="8.5" cy="9" r="1.3"></circle><path d="m5.5 17 4.2-4.2 3.1 3.1 2.2-2.2 3.5 3.5"></path></svg></button>{{/Image}}
+      {{#Comment}}<button class="am-btn am-actionBtn am-actionBtn--icon" onclick="AM.toggleSection('amComment')" type="button" title="Show comment" aria-label="Show comment"><svg class="am-actionIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15v10h-9l-4.5 3.5V5.5Z"></path><path d="M8 9.5h8M8 12.5h5"></path></svg></button>{{/Comment}}
     </div>
   </div>
 
@@ -487,8 +487,17 @@ html, body, body.card, #qa, .card{
   };
 
   AM.initBack = function() {
-    try { localStorage.setItem('am_styleV2', 'true'); } catch (e) {}
-    const isLight = (function(){ try { return JSON.parse(localStorage.getItem('am_lightMode')||'false'); } catch(e){ return false; } })();
+    try {
+      localStorage.setItem('am_styleV2', 'true');
+    } catch (e) {
+    }
+    const isLight = (function () {
+      try {
+        return JSON.parse(localStorage.getItem('am_lightMode') || 'false');
+      } catch (e) {
+        return false;
+      }
+    })();
     document.documentElement.classList.toggle('light-mode', !!isLight);
     document.documentElement.classList.add('am-v2');
 
@@ -510,4 +519,5 @@ html, body, body.card, #qa, .card{
   AM.initBack();
 })();
 </script>
+</div>
 </div>
