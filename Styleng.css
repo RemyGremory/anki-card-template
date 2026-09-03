@@ -1037,5 +1037,44 @@ body::before { display: none !important; }
 html, body, body.card, #qa {
   background-color: var(--am-bg) !important;
 }
+/* The card inherits the page background. Keeping this transparent prevents
+   a second, differently sized gradient from creating bands on mobile. */
 #qa { background: transparent !important; }
-#qa { background: transparent !important; }
+/* In Anki Desktop, #qa is the content viewport. A short card used to leave
+   its lower portion unpainted, exposing Anki's near-black preview background.
+   On iOS, however, #qa also reaches into AnkiMobile's native answer bar, so
+   this viewport height must stay desktop-only. */
+:root.am-desktop #qa {
+  min-height: 100vh !important;
+  min-height: 100svh !important;
+}
+
+/* iPad's embedded Anki viewport is shorter than 100vh because the native
+   answer bar sits beneath it.  This WebKit value fills only the usable card
+   area, without extending underneath that bar. */
+@supports (-webkit-touch-callout: none) {
+  :root.am-ipad,
+  :root.am-ipad body,
+  :root.am-ipad body.card,
+  :root.am-ipad #qa {
+    min-height: -webkit-fill-available !important;
+  }
+}
+
+/* AnkiMobile scrolls long cards outside the usual fixed-position layout.
+   The small iOS helper in Front.html keeps these controls at the viewport
+   coordinates by updating their absolute top position during a scroll. */
+:root.am-js-gear-pin .am-fixed-wrap {
+  position: fixed !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  will-change: auto !important;
+}
+
+:root.am-js-gear-pin .am-fixed-wrap .am-gear,
+:root.am-js-gear-pin .am-fixed-wrap .am-stopAudio {
+  position: absolute !important;
+  bottom: auto !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+}

@@ -38,6 +38,7 @@ html, body, body.card, #qa, .card{
     var(--am-bg) !important;
   background-color: var(--am-bg) !important;
   background-attachment: scroll !important;
+  background-repeat: no-repeat !important;
 }
 .am-card{
   background: var(--am-card-bg) !important;
@@ -504,6 +505,7 @@ html, body, body.card, #qa, .card{
     this._root = CURRENT_ROOT || this._root;
     this.applyDeviceClass();
     this.ensureFixedHost();
+    if (this.installIOSGearPin) this.installIOSGearPin();
     this.preloadRecordedAudio();
 
     // The title/header is already rendered and remains stable. Only sections
